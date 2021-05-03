@@ -11,6 +11,7 @@ class Login extends Component {
       username: "",
       password: "",
       error: "",
+      login: false,
     };
   }
 
@@ -25,7 +26,8 @@ class Login extends Component {
         if ("error" in res.data) {
           this.setState({ error: res.data.error });
         } else {
-          window.location = "/notetracker";
+          this.props.login(res.data);
+          this.props.history.push("/notetracker");
         }
       })
       .catch((err) => console.log(err));
@@ -51,7 +53,7 @@ class Login extends Component {
       >
         <div
           className="w-400 -border bg-dark border-light px-4 py-3 text-white rounded-lg"
-          style={{ width: "500px" }}
+          style={{ width: "500px", opacity: 0.9 }}
         >
           <form className="form-group" onSubmit={this.onLogin}>
             <h3 className="text-center font-weight-bolder">

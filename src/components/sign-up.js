@@ -27,7 +27,6 @@ class SignUp extends Component {
       .then((res) => {
         console.log(res.data);
         if ("error" in res.data) {
-          console.log(res.data);
           this.setState({ error: res.data.error });
         } else {
           window.location = "/";
@@ -56,7 +55,7 @@ class SignUp extends Component {
       >
         <div
           className="w-400 -border bg-dark border-light px-4 py-3 text-white rounded-lg"
-          style={{ width: "500px" }}
+          style={{ width: "500px", opacity: 0.9 }}
         >
           <form className="form-group" onSubmit={this.onSignUp}>
             <h3 className="text-center font-weight-bolder">

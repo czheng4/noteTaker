@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const { createHash } = require("crypto");
 
+/* user schema */
 const userSchema = new Schema({
   username: {
     type: String,
@@ -77,15 +78,6 @@ router.route("/").get((req, res) => {
       res.json(user);
     })
     .catch((err) => res.status(400).json("Error " + err));
-});
-
-router.route("/:username").get((req, res) => {
-  User.findOne({ username: req.params.username })
-    .then((user) => {
-      if (user == null) return res.json("");
-      else return res.json({ error: `User ${user.username} Already exists` });
-    })
-    .catch((error) => res.status(400).json("Error " + err));
 });
 
 module.exports = router;
