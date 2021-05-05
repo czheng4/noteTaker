@@ -55,7 +55,7 @@ class SignUp extends Component {
       >
         <div
           className="w-400 -border bg-dark border-light px-4 py-3 text-white rounded-lg"
-          style={{ width: "500px", opacity: 0.9 }}
+          style={{ width: "500px", opacity: 0.85 }}
         >
           <form className="form-group" onSubmit={this.onSignUp}>
             <h3 className="text-center font-weight-bolder">

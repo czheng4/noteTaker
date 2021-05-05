@@ -20,8 +20,10 @@ mongoose.connection.once("open", () => {
 });
 
 const usersRouter = require("./routes/users");
+app.use("/server/users", usersRouter);
 
-app.use("/users", usersRouter);
+const notesRouter = require("./routes/notes");
+app.use("/server/notes", notesRouter);
 
 app.listen(port, (err) => {
   if (err) console.log(err);

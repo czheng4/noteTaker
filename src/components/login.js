@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import bg from "../imgs/bg.jpg";
 import request from "./axios-request";
@@ -27,7 +26,7 @@ class Login extends Component {
           this.setState({ error: res.data.error });
         } else {
           this.props.login(res.data);
-          this.props.history.push("/notetracker");
+          this.props.history.push("/notetaker");
         }
       })
       .catch((err) => console.log(err));
@@ -53,12 +52,10 @@ class Login extends Component {
       >
         <div
           className="w-400 -border bg-dark border-light px-4 py-3 text-white rounded-lg"
-          style={{ width: "500px", opacity: 0.9 }}
+          style={{ width: "500px", opacity: 0.85 }}
         >
           <form className="form-group" onSubmit={this.onLogin}>
-            <h3 className="text-center font-weight-bolder">
-              Note Tracker Login
-            </h3>
+            <h3 className="text-center font-weight-bolder">Note Taker Login</h3>
             <label className="text-primary">username:</label>
             <input
               type="text"
