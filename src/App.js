@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 import Login from "./components/login";
 import NoteTaker from "./components/note-taker";
 import SignUp from "./components/sign-up";
