@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { github } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -21,15 +22,7 @@ const SHComponent = {
     }
 
     if (!inline && match) {
-      return (
-        <SyntaxHighlighter
-          style={github}
-          language={match[1]}
-          PreTag="div"
-          children={String(children).replace(/\n$/, "")}
-          {...props}
-        />
-      );
+      return <SyntaxHighlighter style={github} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, "")} {...props} />;
     }
 
     return (
@@ -40,9 +33,10 @@ const SHComponent = {
   },
 };
 
-class CreateNote extends Component {
+class CreateEditNote extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       text: "",
       text_height: 250,
@@ -50,6 +44,19 @@ class CreateNote extends Component {
       category: "",
       title: "",
     };
+  }
+
+  componentDidMount() {
+    if (this.props.edit) {
+      request.get(`/notes/edit/${this.props.match.params.id}`).then((res) => {
+        const note = res.data;
+        this.setState({
+          text: note.text,
+          title: note.title,
+          category: note.category,
+        });
+      });
+    }
   }
 
   onSubmit = (e) => {
@@ -64,6 +71,9 @@ class CreateNote extends Component {
       .post("/notes/create", note)
       .then((res) => {
         console.log(res.data);
+        console.log(this.props);
+        this.props.setNoteID(res.data._id);
+        this.props.history.push("/notetaker/create/success");
       })
       .catch((err) => {
         console.log("Error when creating new note: " + err);
@@ -79,6 +89,13 @@ class CreateNote extends Component {
     this.setState({ text: e.target.value });
   };
 
+  onUpdateNote = () => {
+    /* make a put request here */
+  };
+
+  onDeleteNote = () => {
+    /* make a delete request */
+  };
   // onTextResize = (e) => {
   //   this.setState({ text_height: e.target.offsetHeight });
   // };
@@ -106,10 +123,10 @@ class CreateNote extends Component {
         <div className="container-fluid mt-3" style={{ marginBottom: "200px" }}>
           <h3 className="text-center">Create a new note</h3>
           <form onSubmit={this.onSubmit}>
-            <label className="mt-2">Title:</label>
-            <input onChange={this.onTitleChange} type="text" className="form-control" required></input>
             <label className="mt-2">Category:</label>
-            <input onChange={this.onCategoryChange} className="form-control" required></input>
+            <input onChange={this.onCategoryChange} type="text" className="form-control" value={this.state.category} required></input>
+            <label className="mt-2">Title:</label>
+            <input onChange={this.onTitleChange} type="text" value={this.state.title} className="form-control" required></input>
             {/* Show tabs for text/markdown/both */}
             <ul className="nav nav-tabs mt-4">
               {["Text", "Markdown", "Both"].map((value) => {
@@ -118,10 +135,7 @@ class CreateNote extends Component {
                     <button
                       type="button"
                       id={value}
-                      className={
-                        "nav-link " +
-                        (this.state.show_type === value ? "active text-primary" : "border-bottom bg-white")
-                      }
+                      className={"nav-link " + (this.state.show_type === value ? "active text-primary" : "border-bottom bg-white")}
                       onClick={this.onClickShowType}
                     >
                       {value}
@@ -163,12 +177,7 @@ class CreateNote extends Component {
                   resize: "vertical",
                 }}
               >
-                <ReactMarkdown
-                  remarkPlugins={[remarkMath, gfm]}
-                  rehypePlugins={[rehypeKatex]}
-                  className="px-3 py-2"
-                  components={SHComponent}
-                >
+                <ReactMarkdown remarkPlugins={[remarkMath, gfm]} rehypePlugins={[rehypeKatex]} className="px-3 py-2" components={SHComponent}>
                   {this.state.text}
                 </ReactMarkdown>
               </div>
@@ -206,21 +215,24 @@ class CreateNote extends Component {
                       resize: "vertical",
                     }}
                   >
-                    <ReactMarkdown
-                      remarkPlugins={[remarkMath, gfm]}
-                      rehypePlugins={[rehypeKatex]}
-                      className="px-3 py-2"
-                      components={SHComponent}
-                    >
+                    <ReactMarkdown remarkPlugins={[remarkMath, gfm]} rehypePlugins={[rehypeKatex]} className="px-3 py-2" components={SHComponent}>
                       {this.state.text}
                     </ReactMarkdown>
                   </div>
                 </div>
               </div>
             )}
-            <button type="submit" className="btn btn-primary mt-4">
-              Create a new note
-            </button>
+            <div className="mt-4">
+              <button type="submit" className="btn btn-primary">
+                {this.props.edit ? "Update the node" : "Create the new note"}
+              </button>
+              {this.props.edit && (
+                <button type="button" className="btn btn-danger ml-5">
+                  Delete
+                </button>
+              )}
+              {/* <span className="ml-5">123</span> */}
+            </div>
           </form>
         </div>
 
@@ -245,4 +257,4 @@ class CreateNote extends Component {
   }
 }
 
-export default CreateNote;
+export default CreateEditNote;

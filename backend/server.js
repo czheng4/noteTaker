@@ -13,6 +13,7 @@ mongoose.connect(process.env.URI, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 mongoose.connection.once("open", () => {

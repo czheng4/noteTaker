@@ -37,6 +37,27 @@ router.route("/create").post((req, res) => {
     .then(() => res.json(new_note))
     .catch((err) => res.status(400).json("Error " + err));
 });
+router.route("/edit/:id").get((req, res) => {
+  Note.find({ _id: req.params.id })
+    .then((note) => {
+      if (note.length >= 1) res.json(note[0]);
+      else res.status(404).json("Error: Couldn't find the note ");
+    })
+    .catch((err) => res.status(400).json("Error " + err));
+});
+
+router.route("/update/:id").put((req, res) => {
+  const new_note = {
+    text: req.body.text,
+    title: req.body.title,
+    category: req.body.category,
+  };
+  Note.findByIdAndUpdate(req.params.id, new_note)
+    .then((note) => {
+      res.json(note);
+    })
+    .catch((err) => res.status(400).json("Error " + err));
+});
 
 router.route("/:userid").get((req, res) => {
   Note.find({ userid: req.params.userid })

@@ -2,12 +2,24 @@ import React, { Component } from "react";
 import request from "../axios-request";
 import $ from "jquery";
 
-const TableEnry = ({ note, count, search_title, search_content }) => {
-  if (search_title !== "" && note.title.search(search_title) == -1) return null;
-  if (search_content !== "" && note.text.search(search_content) == -1) return null;
+const TableEnry = ({ note, count, search_title, search_content, title_cs, content_cs, history }) => {
+  if (search_title !== "") {
+    if (title_cs && note.title.search(search_title) === -1) return null;
+    if (!title_cs && note.title.search(new RegExp(search_title, "i")) === -1) return null;
+  }
+
+  if (search_content !== "") {
+    if (content_cs && note.text.search(search_content) === -1) return null;
+    if (!content_cs && note.text.search(new RegExp(search_content, "i")) === -1) return null;
+  }
 
   return (
-    <tr onClick={() => console.log("click me")} style={{ cursor: "pointer" }}>
+    <tr
+      onClick={() => {
+        history.push(`/notetaker/edit/${note._id}`);
+      }}
+      style={{ cursor: "pointer" }}
+    >
       <th scope="row" style={{ width: "40px" }}>
         {count}
       </th>
@@ -27,7 +39,7 @@ const SearchInput = ({ toggle, onChange, placeholder, onClick }) => {
       <div className="input-group">
         <div className="input-group-prepend">
           <div className="input-group-text">
-            <input type="checkbox" data-toggle={toggle} title="case insensitive" onClick={onClick} />
+            <input type="checkbox" data-toggle={toggle} title="check it to switch to case sensitive" onClick={onClick} />
           </div>
         </div>
         <input type="text" className="form-control" placeholder={placeholder} onChange={onChange} />
@@ -45,8 +57,8 @@ class NoteList extends Component {
       category: "All categories",
       search_title: "",
       search_content: "",
-      search_title_ci: false /* case insensitive */,
-      search_content_ci: false,
+      search_title_cs: false /* case sensitive */,
+      search_content_cs: false,
     };
   }
   componentDidMount() {
@@ -87,11 +99,11 @@ class NoteList extends Component {
   };
 
   onClickSearchTitle = (e) => {
-    this.setState({ search_title_ci: e.target.checked });
+    this.setState({ search_title_cs: e.target.checked });
   };
 
   onClickSearchContent = (e) => {
-    this.setState({ search_content_ci: e.target.checked });
+    this.setState({ search_content_cs: e.target.checked });
   };
 
   render() {
@@ -153,8 +165,11 @@ class NoteList extends Component {
                         key={note._id}
                         note={note}
                         count={count++}
+                        title_cs={this.state.search_title_cs}
+                        content_cs={this.state.search_content_cs}
                         search_title={this.state.search_title}
                         search_content={this.state.search_content}
+                        history={this.props.history}
                       />
                     );
                   });
@@ -165,8 +180,11 @@ class NoteList extends Component {
                       key={note._id}
                       note={note}
                       count={count++}
+                      title_cs={this.state.search_title_cs}
+                      content_cs={this.state.search_content_cs}
                       search_title={this.state.search_title}
                       search_content={this.state.search_content}
+                      history={this.props.history}
                     />
                   );
                 })}
