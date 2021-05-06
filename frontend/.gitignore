@@ -5,6 +5,7 @@
 /chaohui-note-taker-server
 /node_modules
 /.pnp
+/src/components/axios-request.js 
 .pnp.js
 
 # testing
