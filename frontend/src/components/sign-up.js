@@ -59,7 +59,7 @@ class SignUp extends Component {
             <label className="text-primary">username:</label>
             <input type="text" className="form-control" onChange={this.onChangeUsername} required></input>
             <label className="text-primary mt-4">password:</label>
-            <input type="text" className="form-control" onChange={this.onChangePassword} required></input>
+            <input type="password" className="form-control" onChange={this.onChangePassword} required></input>
 
             <button className="btn btn-primary mt-3 form-control">Create</button>
             <div className="text-warning mt-3 text-center">{this.state.error}</div>
