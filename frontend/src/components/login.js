@@ -50,7 +50,7 @@ class Login extends Component {
           height: "100vh",
         }}
       >
-        <div className="border bg-dark border-light px-4 py-3 text-white rounded-lg mb-5" style={{ width: "500px", opacity: 0.85 }}>
+        <div className="bg-dark border-light px-4 py-3 text-white rounded-lg mb-5" style={{ width: "500px", opacity: 0.85 }}>
           <form className="form-group" onSubmit={this.onLogin}>
             <h3 className="text-center font-weight-bolder">Note Taker Login</h3>
             <label className="text-primary">username:</label>

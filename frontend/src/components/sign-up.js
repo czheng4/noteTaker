@@ -53,28 +53,13 @@ class SignUp extends Component {
           height: "100vh",
         }}
       >
-        <div
-          className="w-400 -border bg-dark border-light px-4 py-3 text-white rounded-lg"
-          style={{ width: "500px", opacity: 0.85 }}
-        >
+        <div className="bg-dark border-light px-4 py-3 text-white rounded-lg mb-5" style={{ width: "500px", opacity: 0.85 }}>
           <form className="form-group" onSubmit={this.onSignUp}>
-            <h3 className="text-center font-weight-bolder">
-              Create a new account
-            </h3>
+            <h3 className="text-center font-weight-bolder">Create a new account</h3>
             <label className="text-primary">username:</label>
-            <input
-              type="text"
-              className="form-control"
-              onChange={this.onChangeUsername}
-              required
-            ></input>
+            <input type="text" className="form-control" onChange={this.onChangeUsername} required></input>
             <label className="text-primary mt-4">password:</label>
-            <input
-              type="text"
-              className="form-control"
-              onChange={this.onChangePassword}
-              required
-            ></input>
+            <input type="text" className="form-control" onChange={this.onChangePassword} required></input>
             <div className="mt-4">
               <button className="btn btn-primary">Create</button>
               <span className="text-warning ml-5">{this.state.error}</span>
