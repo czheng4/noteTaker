@@ -168,7 +168,7 @@ class CreateEditNote extends Component {
             {/* only show markdown */}
             {this.state.show_type === "Markdown" && (
               <div
-                className="border rounded overflow-auto mt-4"
+                className="border rounded overflow-auto mt-4 bg-white"
                 style={{
                   height: this.state.text_height + "px",
                   fontSize: "15px",
@@ -206,7 +206,7 @@ class CreateEditNote extends Component {
                 <div className="col-lg-6">
                   <label className="mt-4">Markdown:</label>
                   <div
-                    className="border rounded overflow-auto"
+                    className="border rounded overflow-auto bg-white"
                     style={{
                       height: this.state.text_height + "px",
                       fontSize: "15px",
