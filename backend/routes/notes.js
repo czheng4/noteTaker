@@ -59,6 +59,12 @@ router.route("/update/:id").put((req, res) => {
     .catch((err) => res.status(400).json("Error " + err));
 });
 
+router.route("/delete/:id").delete((req, res) => {
+  Note.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Delete note successully"))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.route("/:userid").get((req, res) => {
   Note.find({ userid: req.params.userid })
     .then((notes) => {

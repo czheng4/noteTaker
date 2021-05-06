@@ -23,11 +23,17 @@ class NoteTaker extends Component {
         <Switch>
           <Route path="/notetaker" exact render={(route_props) => <NoteList {...route_props} user={this.props.user} />} />
           <Route
+            key="create-note"
             path="/notetaker/create"
             exact
             render={(route_props) => <CreateEditNote {...route_props} edit={false} user={this.props.user} setNoteID={this.setNoteID} />}
           />
-          <Route path="/notetaker/edit/:id" exact render={(route_props) => <CreateEditNote {...route_props} edit={true} user={this.props.user} />} />
+          <Route
+            key="edit-note"
+            path="/notetaker/edit/:id"
+            exact
+            render={(route_props) => <CreateEditNote {...route_props} edit={true} user={this.props.user} />}
+          />
           <Route
             path="/notetaker/create/success"
             exact

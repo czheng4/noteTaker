@@ -78,8 +78,6 @@ class NoteList extends Component {
           notes[note.category].push(note);
         }
         this.setState({ notes: notes });
-
-        console.log(notes);
       })
       .catch((err) => {
         console.log("Error when getting notes " + err);
@@ -159,7 +157,6 @@ class NoteList extends Component {
             {this.state.category === "All categories"
               ? Object.entries(this.state.notes).map(([category, notes]) => {
                   return notes.map((note) => {
-                    console.log(count, this.state.search_title, this.state.search_content);
                     return (
                       <TableEnry
                         key={note._id}
