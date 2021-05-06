@@ -57,10 +57,10 @@ class Login extends Component {
             <input type="text" className="form-control" onChange={this.onChangeUsername} required></input>
             <label className="text-primary mt-4">password:</label>
             <input type="text" className="form-control" onChange={this.onChangePassword} required></input>
-            <div className="mt-4">
-              <button className="btn btn-primary">Login</button>
-              <span className="text-warning ml-5">{this.state.error}</span>
-            </div>
+
+            <button className="btn btn-primary form-control mt-3">Login</button>
+            <div className="text-warning text-center mt-3">{this.state.error}</div>
+
             <div className="mt-4">
               <Link to="/signup">create a new account</Link>
             </div>

@@ -25,8 +25,8 @@ const TableEnry = ({ note, count, search_title, search_content, title_cs, conten
       </th>
       <td>{note.title}</td>
       <td>
-        {note.text.substring(0, 200)}
-        {note.text.length > 200 && <span> &middot;&middot;&middot;</span>}
+        {note.text.substring(0, 100)}
+        {note.text.length > 100 && <span> &middot;&middot;&middot;</span>}
       </td>
       <td>{note.category}</td>
     </tr>

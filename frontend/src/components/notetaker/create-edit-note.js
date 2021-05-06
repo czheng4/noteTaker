@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { github } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -48,7 +47,6 @@ class CreateEditNote extends Component {
   }
 
   componentDidMount() {
-    console.log("why 1231");
     if (this.props.edit) {
       request
         .get(`/notes/edit/${this.props.match.params.id}`)
