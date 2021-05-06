@@ -2,7 +2,6 @@
   "name": "note-tracker",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://github.com/czheng4.github.io/noteTaker",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
