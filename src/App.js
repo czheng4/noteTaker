@@ -20,11 +20,6 @@ class App extends Component {
     this.setState({ login: true, userid: user._id, theme: user.theme });
   };
 
-  logout = () => {
-    console.log("logout");
-    this.setState({ login: false });
-  };
-
   render() {
     return (
       <Router>
