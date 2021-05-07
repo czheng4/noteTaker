@@ -9,6 +9,7 @@ import { Component } from "react";
 class App extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       userid: "",
       theme: "",
